@@ -25,6 +25,7 @@ class HotelForm
                 FileUpload::make('image')
                     ->image()
                     ->directory('hotel-images')
+                    ->disk('public')
                     ->columnSpanFull(),
                 Repeater::make('roomTypes')
                     ->relationship()

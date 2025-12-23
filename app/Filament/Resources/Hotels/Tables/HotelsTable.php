@@ -16,7 +16,8 @@ class HotelsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('image'),
+                ImageColumn::make('image')
+                    ->disk('public'),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('address')
