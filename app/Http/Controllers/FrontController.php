@@ -80,4 +80,13 @@ class FrontController extends Controller
 
         return view('bookings.history', compact('bookings'));
     }
+    // Detail Booking
+    public function bookingShow($id)
+    {
+        $booking = \App\Models\Booking::with(['hotel', 'roomType', 'user'])
+            ->where('user_id', \Illuminate\Support\Facades\Auth::id())
+            ->findOrFail($id);
+
+        return view('bookings.show', compact('booking'));
+    }
 }

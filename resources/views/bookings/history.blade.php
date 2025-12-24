@@ -57,9 +57,13 @@
                                     </div>
                                 </div>
 
-                                <div class="border-t pt-4 text-right">
+                                <div class="border-t pt-4 text-right flex justify-between items-center">
                                     <span class="text-xs text-gray-400">Dipesan pada
                                         {{ $booking->created_at->translatedFormat('d F Y H:i') }}</span>
+                                    <a href="{{ route('booking.show', $booking->id) }}"
+                                        class="px-4 py-2 bg-purple-600 text-white text-sm font-bold rounded-lg hover:bg-purple-700 transition">
+                                        Lihat Detail
+                                    </a>
                                 </div>
                             </div>
                         </div>

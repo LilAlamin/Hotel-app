@@ -24,4 +24,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout', [FrontController::class, 'checkout'])->name('checkout.process');
     Route::post('/booking/store', [FrontController::class, 'storeBooking'])->name('booking.store');
     Route::get('/my-bookings', [FrontController::class, 'history'])->name('booking.history');
+    Route::get('/booking/{id}', [FrontController::class, 'bookingShow'])->name('booking.show');
 });
