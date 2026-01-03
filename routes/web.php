@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController; // <--- Import ini
 // Halaman Publik
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/hotels/{id}', [FrontController::class, 'show'])->name('hotels.show');
+Route::get('/destinations', [FrontController::class, 'destinations'])->name('destinations');
 
 // --- Routes Autentikasi (Tambahkan Ini) ---
 Route::middleware('guest')->group(function () {

@@ -10,6 +10,8 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
         }
     </style>
 </head>

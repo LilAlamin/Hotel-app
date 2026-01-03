@@ -12,8 +12,15 @@ class FrontController extends Controller
     // Menampilkan Katalog
     public function index()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::limit(3)->get(); // Limit just 3 for home
         return view('home', compact('hotels'));
+    }
+
+    // Menampilkan Semua Destinasi
+    public function destinations()
+    {
+        $hotels = Hotel::all(); // Show all here
+        return view('destinations', compact('hotels'));
     }
 
     // Menampilkan Detail Hotel & Form Booking
