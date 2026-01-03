@@ -300,9 +300,14 @@
                                     <div>
                                         <h3 class="text-3xl font-semibold text-neutral-100 mb-2 font-serif">
                                             {{ $hotel->name }}</h3>
-                                        <p class="text-neutral-400 mb-6 flex items-center justify-center text-sm">
+                                        <p class="text-neutral-400 mb-3 flex items-center justify-center text-sm">
                                             <i data-feather="map-pin" class="w-4 h-4 mr-2 text-amber-500"></i>
                                             {{ Str::limit($hotel->address, 50) }}
+                                        </p>
+                                        <p
+                                            class="text-neutral-500 mb-6 flex items-center justify-center text-xs font-bold uppercase tracking-wider">
+                                            <i data-feather="grid" class="w-3 h-3 mr-2 text-neutral-600"></i>
+                                            {{ $hotel->roomTypes->count() }} Tipe Kamar Tersedia
                                         </p>
                                     </div>
                                     <a href="{{ route('hotels.show', $hotel->id) }}"

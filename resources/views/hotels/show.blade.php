@@ -58,9 +58,13 @@
                             <h1
                                 class="text-4xl md:text-5xl font-extrabold text-amber-400 mb-4 font-serif leading-tight">
                                 {{ $hotel->name }}</h1>
-                            <p class="text-neutral-400 text-lg flex items-center">
+                            <p class="text-neutral-400 text-lg flex items-center mb-3">
                                 <i data-feather="map-pin" class="w-5 h-5 mr-2 text-amber-500"></i>
                                 {{ $hotel->address }}
+                            </p>
+                            <p class="text-neutral-500 flex items-center text-sm font-bold uppercase tracking-wider">
+                                <i data-feather="grid" class="w-4 h-4 mr-2 text-neutral-600"></i>
+                                {{ $hotel->roomTypes->count() }} Tipe Kamar Tersedia
                             </p>
                         </div>
 
@@ -90,19 +94,40 @@
                                     Tempat Perlindungan Anda</label>
                                 <div class="space-y-4">
                                     @foreach ($hotel->roomTypes as $room)
-                                        <label
-                                            class="flex items-center p-5 border rounded-2xl cursor-pointer hover:bg-neutral-800 transition border-neutral-700 has-[:checked]:border-amber-500 has-[:checked]:bg-neutral-800/50 has-[:checked]:ring-1 has-[:checked]:ring-amber-500 group">
-                                            <input type="radio" name="room_type_id" value="{{ $room->id }}"
-                                                required
-                                                class="h-5 w-5 text-amber-500 border-neutral-600 focus:ring-amber-500 bg-neutral-800">
-                                            <div class="ml-4 w-full flex justify-between items-center">
-                                                <span
-                                                    class="font-medium text-lg text-neutral-200 group-hover:text-amber-400 transition">{{ $room->name }}</span>
-                                                <span class="text-amber-400 font-bold text-lg">Rp
-                                                    {{ number_format($room->price, 0, ',', '.') }}<span
-                                                        class="text-sm text-neutral-500 font-normal">/malam</span></span>
+                                        @if ($room->total_rooms > 0)
+                                            <label
+                                                class="flex items-center p-5 border rounded-2xl cursor-pointer hover:bg-neutral-800 transition border-neutral-700 has-[:checked]:border-amber-500 has-[:checked]:bg-neutral-800/50 has-[:checked]:ring-1 has-[:checked]:ring-amber-500 group">
+                                                <input type="radio" name="room_type_id" value="{{ $room->id }}"
+                                                    required
+                                                    class="h-5 w-5 text-amber-500 border-neutral-600 focus:ring-amber-500 bg-neutral-800">
+                                                <div class="ml-4 w-full flex justify-between items-center">
+                                                    <span
+                                                        class="font-medium text-lg text-neutral-200 group-hover:text-amber-400 transition">{{ $room->name }}</span>
+                                                    <span class="text-amber-400 font-bold text-lg">Rp
+                                                        {{ number_format($room->price, 0, ',', '.') }}<span
+                                                            class="text-sm text-neutral-500 font-normal">/malam</span></span>
+                                                </div>
+                                            </label>
+                                        @else
+                                            <div
+                                                class="flex items-center p-5 border rounded-2xl border-neutral-800 bg-neutral-900/50 opacity-60 cursor-not-allowed relative overflow-hidden">
+                                                <div
+                                                    class="absolute inset-0 bg-neutral-950/20 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                                                    <span
+                                                        class="bg-red-900/80 text-red-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-red-500/30 shadow-lg transform -rotate-2">Habis
+                                                        Terjual</span>
+                                                </div>
+                                                <input type="radio" disabled
+                                                    class="h-5 w-5 text-neutral-600 border-neutral-700 bg-neutral-800 cursor-not-allowed">
+                                                <div class="ml-4 w-full flex justify-between items-center blur-[1px]">
+                                                    <span
+                                                        class="font-medium text-lg text-neutral-500">{{ $room->name }}</span>
+                                                    <span class="text-neutral-600 font-bold text-lg">Rp
+                                                        {{ number_format($room->price, 0, ',', '.') }}<span
+                                                            class="text-sm text-neutral-700 font-normal">/malam</span></span>
+                                                </div>
                                             </div>
-                                        </label>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>

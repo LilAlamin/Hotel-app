@@ -42,6 +42,10 @@ class FrontController extends Controller
 
         $hotel = Hotel::findOrFail($request->hotel_id);
         $roomType = RoomType::findOrFail($request->room_type_id);
+
+        if ($roomType->total_rooms <= 0) {
+            return redirect()->back()->with('error', 'Maaf, tipe kamar ini sudah habis terjual.');
+        }
         
         $checkIn = Carbon::parse($request->check_in);
         $checkOut = Carbon::parse($request->check_out);
@@ -64,6 +68,15 @@ class FrontController extends Controller
             'total_price' => 'required|numeric',
         ]);
 
+        $roomType = RoomType::findOrFail($request->room_type_id);
+
+        if ($roomType->total_rooms <= 0) {
+            return redirect()->back()->with('error', 'Maaf, tipe kamar ini sudah habis terjual.');
+        }
+
+        // Decrement room quantity
+        $roomType->decrement('total_rooms');
+
         \App\Models\Booking::create([
             'user_id' => \Illuminate\Support\Facades\Auth::id(),
             'hotel_id' => $request->hotel_id,
@@ -74,7 +87,7 @@ class FrontController extends Controller
             'status' => 'success', // Langsung sukses sebagai simulasi
         ]);
 
-        return redirect()->route('booking.history')->with('success', 'Pemesanan Berhasil!');
+        return redirect()->route('booking.history')->with('success', 'Pemesanan Berhasil! Stok kamar telah diamankan.');
     }
 
     // Halaman Riwayat Booking
